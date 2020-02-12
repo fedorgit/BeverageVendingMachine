@@ -1,0 +1,64 @@
+﻿<!--<nav class="navbar navbar-expang-lg navbar-dark bg-dark fixed-top">-->
+<nav class="navbar navbar-dark bg-dark sticky-top" style="min-height: 80px !important;">
+
+    <div class="col-2 my-auto text-light">
+        Внесите монеты:
+    </div>
+
+    <div class="col-1 my-auto" *ngFor="let coin of coins">
+        <button class="btn btn-warning" [disabled]="coin?.isBlock" style="width: 50px; height: 50px; border-radius: 50%;" (click)="depositCoin(coin)">
+            {{coin?.nominal}}
+        </button>
+    </div>
+
+    <div class="col-3 my-auto text-light">
+        Внесенная сумма: {{summa}}
+    </div>
+
+    <div class="col-3 my-auto">
+        <input type="button" value="Возврат сдачи" class="btn btn-primary" (click)="returnCoin()" />
+    </div>
+</nav>
+
+<h1>Автомат по продаже напитков</h1>
+<h2>Предлагаемая продукция:</h2>
+<!--<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Идентификатор</td>
+            <td>Изображение</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Количество</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product?.id}}</td>
+            <td><img width="300" height="300" *ngIf="product.imageFile" src="{{product?.imageFile}}" /></td>
+            <td>{{product?.name}}</td>
+            <td>{{product?.price}}</td>
+            <td>{{product?.count}}</td>
+            <td><button (click)="tradeProduct(product)">Выбрать</button></td>
+        </tr>
+    </tbody>
+</table>-->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="mx-2 mb-4 border rounded" *ngFor="let product of products">
+            <button class="btn" (click)="tradeProduct(product)">
+                <img width="300" height="300" *ngIf="product.imageFile" src="/images/{{product?.imageFile}}" /><br>
+                <b>{{product?.name}}</b><br>
+                Цена: {{product?.price}}<br>
+                Кол-во: {{product?.count}}<br>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<notifier-container></notifier-container>
+
+

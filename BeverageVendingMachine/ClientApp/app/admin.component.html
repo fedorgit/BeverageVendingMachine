@@ -1,0 +1,99 @@
+﻿<h1>Панель администратора</h1>
+
+<!--<div class="container">
+
+    <h2>Редактирование ассортимента напитков</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Изображение</td>
+                <td>Название</td>
+                <td>Цена</td>
+                <td>Количество</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>
+                    <input #fileInput id="fileInput" type='file' (click)="fileInput.value = null" accept="image/*,image/jpeg" (change)="onImageSelected(product, $event.target.files)" />
+                    <img width="300" height="300" *ngIf="product.imageFile" src="/images/{{product?.imageFile}}" />
+                </td>
+                <td><input [(ngModel)]="product.name" class="form-control" /></td>
+                <td><input type="number" [(ngModel)]="product.price" class="form-control" min="0" step="1" data-bind="value:replyNumber" /></td>
+                <td><input type="number" [(ngModel)]="product.count" class="form-control" min="0" step="1" data-bind="value:replyNumber" /></td>
+                <td><input type="button" value="Сохранить изменения" class="btn btn-primary" (click)="save(product)" /></td>
+                <td><input type="button" value="Удалить" class="btn btn-danger" (click)="delete(product)" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="col-sm-2">
+        <input type="button" value="Добавить напиток" class="btn btn-success" (click)="add()" />
+    </div>
+</div>-->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="mx-2 my-2 p-2 border rounded" *ngFor="let product of products">
+
+            <input #fileInput id="fileInput" type='file' (click)="fileInput.value = null" accept="image/*,image/jpeg" (change)="onImageSelected(product, $event.target.files)" /><br>
+            <img width="300" height="300" *ngIf="product.imageFile" src="/images/{{product?.imageFile}}" /><br>
+
+            Название: <input [(ngModel)]="product.name" class="form-control" />
+            Цена: <input type="number" [(ngModel)]="product.price" class="form-control" min="0" step="1" data-bind="value:replyNumber" />
+            Кол-во: <input type="number" [(ngModel)]="product.count" class="form-control" min="0" step="1" data-bind="value:replyNumber" />
+            <br>
+            <input type="button" value="Сохранить изменения" class="btn btn-primary" (click)="save(product)" />
+            <input type="button" value="Удалить" class="btn btn-danger" (click)="delete(product)" />
+        </div>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="col-sm-2">
+    <input type="button" value="Добавить напиток" class="btn btn-success" (click)="add()" />
+</div>
+
+<hr>
+
+<div class="container">
+    <div class="row">
+
+        <!-- Экспорт напитков-->
+        <div class="col">
+            <label for="exportProduct"><b>Экспорт напитков</b></label><br>
+            <button id="exportProduct" class="btn btn-info" download (click)="exportProducts()">Экспортировать...</button><br>
+        </div>
+
+        <!-- Импорт напитков-->
+        <div class="col">
+            <label for="importProduct"><b>Импорт напитков</b></label><br>
+            <input id="importProduct" type="file" class="btn btn-warning" accept=".json" (change)="importProducts($event.target.files)">
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="container">
+    <h2>Управление монетами</h2>
+    <div class="row">
+        <div class="mx-2" *ngFor="let coin of coins">
+            Id: {{coin?.id}} <br>
+            Номинал: <b>{{coin?.nominal}}</b><br>
+            Кол-во монет: <input type="number" [(ngModel)]="coin.count" class="form-control" min="0" step="1" data-bind="value:replyNumber" /><br>
+            Заблокировано: <input type="checkbox" [(ngModel)]="coin.isBlock" /><br>
+            <input type="button" value="Сохранить изменения" class="btn btn-primary" (click)="saveCoin(coin)" />
+        </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>
+
+<footer class="footer">
+    <div style="height: 500px;">
+    </div>
+</footer>
